@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blocks Layout</title>
+    <link rel="stylesheet" href="explore.css" /> <!-- 連結外部 CSS 檔案 -->
+  </head>
+  <body id="explorePage">
+
+    <header class="navbar">
+      <button id="infoButton" class="nav-item">Info</button>
+      <div class="nav-center">BLÜME</div>
+      <button id="generateButton" class="nav-item">Generate</button> <!-- ✅ 新增按鈕 -->
+    </header>
+  
+  <!-- 左側彈出的 Info 視窗 -->
+    <div id="infoPanel" class="info-panel">
+        <div class="info-content">
+            <!-- 🔹 Info 和 叉叉 (✖) 在同一行 -->
+            <div class="info-header">
+                <span>Info</span>
+                <button id="closeButton" class="close-btn">&times;</button> <!-- ✖ 符號 -->
+            </div
+            <p>      </p>
+            <p>歡迎來到BLÜME ！</p>
+            <p>這裡是一個很特別的花朵博物館，但你看到的花並不是來自田野或花店，而是來自你的內心。</p>
+            <p>BLÜME 會透過問一些小問題跟你互動，當你真誠回答並送出後，它就會開始分析你的情緒，然後為你生成一朵專屬的情緒之花。</p>
+            <p>這個小小的作品，想要嘗試探索那些藏在文字背後、看不見的情緒，將它們與美麗的花朵及花語連結在一起。花語不只是傳遞愛意，更能重新被賦予新的意義，讓每朵花都成為情緒的載體。</p>
+            <p>現在就一起來創造屬於你的情緒花園！</p>
+            <p>      </p>
+            <p>      </p>
+            <p>Welcome to BLÜME! </p>
+            <p>This is a very special flower museum, but the flowers you'll see here aren't from fields or flower shops—they come straight from your heart.</p>
+            <p>BLÜME interacts with you by asking fun little questions. When you sincerely respond and submit your answers, it analyzes your emotions and creates a unique emotional flower just for you.</p>
+            <p>This small project aims to explore the invisible emotions hidden behind words, connecting them with beautiful flowers and their meanings. The language of flowers isn't just about expressing love—it can be redefined to become a carrier of emotions, making unseen feelings visible, understood, and shared.</p>
+            <p>Let's start building your emotional garden together now! </p>
+        </div>
+
+        <button id="generateFlowerButton" class="generate-flower-btn">
+          Let’s generate your flower
+        </button>
+    </div>
+    
+    <div class="blur-background"></div>
+  
+    <!-- 容器，內含多個 .block -->
+    <div class="view">
+      <div class="block"><img src="imagesE/images1.jpg" alt="Image 1"></div>
+      <div class="block"><img src="imagesE/images2.jpg" alt="Image 2"></div>
+      <div class="block"><img src="imagesE/images3.jpg" alt="Image 3"></div>
+      <div class="block"><img src="imagesE/images4.jpg" alt="Image 4"></div>
+      <div class="block"><img src="imagesE/images5.jpg" alt="Image 5"></div>
+      <div class="block"><img src="imagesE/images6.jpg" alt="Image 6"></div>
+      <div class="block"><img src="imagesE/images7.jpg" alt="Image 7"></div>
+      <div class="block"><img src="imagesE/images8.jpg" alt="Image 8"></div>
+      <div class="block"><img src="imagesE/images9.jpg" alt="Image 9"></div>
+      <div class="block"><img src="imagesE/images10.jpg" alt="Image 10"></div>
+      <div class="block"><img src="imagesE/images11.jpg" alt="Image 11"></div>
+      <div class="block"><img src="imagesE/images12.jpg" alt="Image 12"></div>
+      <div class="block"><img src="imagesE/images13.jpg" alt="Image 13"></div>
+      <div class="block"><img src="imagesE/images14.jpg" alt="Image 14"></div>
+      <div class="block"><img src="imagesE/images15.jpg" alt="Image 15"></div>
+      <div class="block"><img src="imagesE/images16.jpg" alt="Image 16"></div>
+      <div class="block"><img src="imagesE/images17.jpg" alt="Image 17"></div>
+      <div class="block"><img src="imagesE/images18.jpg" alt="Image 18"></div>
+      <div class="block"><img src="imagesE/images19.jpg" alt="Image 19"></div>
+      <div class="block"><img src="imagesE/images20.jpg" alt="Image 20"></div>   
+      <div class="block"><img src="imagesE/images21.jpg" alt="Image 21"></div>
+      <div class="block"><img src="imagesE/images22.jpg" alt="Image 22"></div>
+      <div class="block"><img src="imagesE/images23.jpg" alt="Image 23"></div>
+      <div class="block"><img src="imagesE/images24.jpg" alt="Image 24"></div>
+      <div class="block"><img src="imagesE/images25.jpg" alt="Image 25"></div>
+      <div class="block"><img src="imagesE/images26.jpg" alt="Image 26"></div>
+      <div class="block"><img src="imagesE/images27.jpg" alt="Image 27"></div>
+      <div class="block"><img src="imagesE/images28.jpg" alt="Image 28"></div>
+      <div class="block"><img src="imagesE/images29.jpg" alt="Image 29"></div>
+      <div class="block"><img src="imagesE/images30.jpg" alt="Image 30"></div>
+      
+      
+    </div>
+
+    <div id="videoContainerExplore">
+
+      <button id="backButton" class="back-button">Back</button>
+
+      <video id="exploreVideo" preload="auto" muted autoplay>
+        <source src="video/example-1.mp4" type="video/mp4">
+        您的瀏覽器不支援影片播放。
+      </video>
+
+      <div id="videoText" class="video-text">原本這個網站的前半部分有連動Open Ai，Open Ai的程式碼要上傳到Github有點麻煩，所以以影片的方式說明前半段的網頁。</div>
+
+    </div>
+
+    <script src="script.js"></script>  
+  </body>
+</html>
