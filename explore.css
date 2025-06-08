@@ -1,0 +1,436 @@
+html, body {
+    width: 100%;
+    overflow-x: hidden; 
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+}
+
+html::-webkit-scrollbar, 
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/* explorePage 初始時透明 */
+#explorePage {
+    opacity: 0;
+    transition: opacity 1.5s ease-out;
+}
+
+/* 當頁面載入時，讓它淡入 */
+#explorePage.fade-in {
+    opacity: 1;
+}
+
+#explorePage {
+    background-color: black;
+    width: 100%;
+    margin: 0;
+    min-height: 100vh;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+/* 讓 .view 容器使用 CSS Grid，讓每排 5 個 */
+#explorePage .view {
+    width: 95%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    padding: 50px 0;
+}
+  
+/* 設定 .block 基本樣式 */
+#explorePage .block {
+    aspect-ratio: 1 / 1.2;
+    border-radius: 30px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+/* 讓 .block 內的圖片適應大小 */
+#explorePage .block img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+
+/* 初始狀態：讓所有 .block 透明，並稍微往下移 */
+.block {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+/* 逐步淡入 */
+.block.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 上方欄位 */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background-color:black;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    z-index: 100;
+}
+
+/* 上方欄位 中央標題（Blume） */
+.nav-center {
+    font-family:'Montserrat', sans-serif;
+    font-weight: 700;
+    font-weight: bold;
+    font-size: 40px;
+    color: white;
+}
+
+/* 🔹 確保內容不會被 Navbar 擋住 */
+#explorePage .view {
+    margin-top: 70px; 
+    margin-bottom: 70px;
+}
+
+/* Navbar 內的按鈕格式統一 */
+.nav-item {
+    background: none;
+    border: none;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0;
+    color: white;
+}
+
+/* generate 按鈕 */
+#generateButton {
+    position: absolute;
+    right: 40px; /* ✅ 讓它靠右對齊 */
+    padding-right: 8px;
+}
+
+/*  Info 按鈕 */
+#infoButton {
+    position: absolute;
+    left: 40px;
+    font-weight: bold;
+    padding-left: 8px;
+    cursor: pointer;
+}
+
+/* 過渡色彩 */
+#infoButton,
+#generateButton {
+  transition: color 0.3s ease;
+}
+
+/* hover 效果 */
+#infoButton:hover,
+#generateButton:hover {
+  color: #e496b2;
+}
+
+/* 左側彈出視窗 */
+.info-panel {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 650px;
+    height: 100vh;
+    background: black;
+    box-shadow: 4px 0px 6px rgba(0, 0, 0, 0.2);
+    transition: left 0.5s ease-in-out;
+    z-index: 1100; 
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.info-panel.active {
+    left: 0;
+}
+
+/* ✅ 關閉按鈕 */
+.close-btn {
+    font-size: 18px;
+    color: white;
+    font-weight: bold;
+    background: none;
+    border: none;
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+/* ✅ Info 內容區塊 */
+.info-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    line-height: 1.4; 
+}
+
+.info-content p {
+    margin: 8px 0; 
+    padding: 0; 
+}
+
+
+/* 設定 Info 彈出視窗的標題區 */
+.info-header {
+    display: flex;
+    justify-content: space-between; /* 讓 "Info" 在左，叉叉在右 */
+    align-items: center;
+    font-size: 30px;
+    font-weight: bold;
+    border-bottom: 1px solid black;
+}
+
+/* 🔹 叉叉按鈕樣式 */
+.close-btn {
+    font-size: 24px; /* 調大叉叉 */
+    font-weight: bold;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* 初始狀態，.block 在畫面外 */
+.block {
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+/* ✅ 背景模糊效果 */
+.blur-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(10px); 
+    background: rgba(0, 0, 0, 0.3); 
+    z-index: 900; 
+    opacity: 0; 
+    pointer-events: none; 
+    transition: opacity 0.5s ease-in-out; 
+}
+
+/* 當背景顯示時（淡入） */
+.blur-background.show {
+    opacity: 1;
+    pointer-events: auto; 
+}
+
+
+/* 浮動的卡片樣式 */
+.floating-block {
+    position: fixed;
+    top: 50%;
+    left: -100%;
+    transform: translate(-50%, -50%);
+    width: 427px;
+    height: 597.8px;
+    z-index: 1000;
+    transition: left 0.5s ease-in-out;
+    border-radius: 35px; 
+    overflow: hidden; 
+}
+
+/* 當 block 進入畫面時 */
+.floating-block.show {
+    left: 50%;
+}
+
+/* 當 block 離開畫面時（左滑出） */
+.floating-block.hide {
+    left: -100%;
+}
+
+/* 讓浮動的圖片適應大小 */
+.floating-block img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    border-radius: 10px;
+}
+
+/* 讓按鈕靠左 */
+.info-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    align-items: flex-start; 
+}
+
+/* Generate Flower按鈕 */
+.generate-flower-btn {
+    all: unset;  /* 讓按鈕靠左 */
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 35px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    text-align: left;
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
+    margin-top: auto;
+    margin-bottom: 10%;
+    transition: color 0.3s ease, background-color 0.3s ease; /* ✅ 讓顏色變化平滑 */
+    padding: 30px 0px;
+
+}
+
+/* Generate Flower按鈕hover效果 */
+.generate-flower-btn:hover {
+    color: #e496b2; 
+}
+
+/* 箭頭橫線 */
+.generate-flower-btn::after {
+    content: "";
+    display: inline-block;
+    width: 100px;  
+    height: 3px;  
+    background-color: white;
+    position: relative;
+    margin-left: 10px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* 箭頭「頭部」 */
+.generate-flower-btn::before {
+    content: "";
+    position: absolute;
+    right: 0px;  
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+    width: 10px;  
+    height: 10px;
+    border-top: 3px solid white;
+    border-right: 3px solid white;
+    transition: right 0.3s ease, border-color 0.3s ease; 
+}
+
+/* 滑鼠hover時，讓線條右移 */
+.generate-flower-btn:hover::after {
+    transform: translateX(5px);
+    background-color: #e496b2; 
+}
+
+/* 滑鼠hover時，讓箭頭也右移 */
+.generate-flower-btn:hover::before {
+    right: -5px;  
+    border-color: #e496b2; 
+}
+
+/* 影片容器變成固定定位的全螢幕 */
+#videoContainerExplore {
+    position: fixed;   
+    top: 0;
+    left: 0;
+    width: 100vw;      
+    height: 100vh;     
+    background: black; 
+    display: none;     
+    opacity: 0;
+    z-index: 1000;     
+    transition: opacity 0.6s ease-out;
+}
+  
+/* 淡入時顯示並漸層至不透明 */
+#videoContainerExplore.fade-in {
+    display: block;
+    opacity: 1;
+}
+  
+/* 影片本身撐滿容器 */
+#videoContainerExplore video {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;          
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+  
+/* 影片文字內容 */
+#videoText {
+    display: none;
+    margin-top: 12px;
+    text-align: center;
+    font-size: 16px;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: pre-wrap;
+    line-height: 1.6; 
+}
+  
+#videoText.show {
+    display: block;
+    animation: fadeInText 0.6s ease-out;
+}
+  
+@keyframes fadeInText {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* 讓 back-button 也有箭頭 */
+.back-button {
+    all: unset;                
+    position: absolute;
+    top: 93%;
+    left: 7%;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    z-index: 1001;
+}
+  
+.back-button::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(-150%, -50%) rotate(-135deg);
+    width: 10px;
+    height: 10px;
+    border-top: 3px solid white;
+    border-right: 3px solid white;
+    transition: border-color 0.3s ease;
+    pointer-events: none;
+}
+  
+.back-button:hover {
+    color: #e496b2;
+}
+
+.back-button:hover::before {
+    border-color: #e496b2;
+}
